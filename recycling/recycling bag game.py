@@ -4,12 +4,12 @@ import random
 
 TITLE="CLICK THE BAG GAME"
 WIDTH=800
-HEIGHT=500
+HEIGHT=600
 centre_x=WIDTH/2
 centre_y=HEIGHT/2
 centre=(centre_x,centre_y)
 start_speed=10
-ITEMS=["paperbag","crate","plasticbag","bin"]
+ITEMS=["paperbag","crate","plasticbag","bin","battery","bottle","chips"]
 gameover=False
 game_complete=False
 current_level=1
@@ -70,11 +70,12 @@ def layout_items(items_to_layout):
 
 def animate_items(items_to_animate):
     global animations
+    animations=[]
     for item in items_to_animate:
         duration=start_speed-current_level
         item.anchor=("center","bottom")
-        animations=animate(item,duration=duration,on_finished=handle_game_over,y=HEIGHT)
-        animations.append(animations)
+        animation=animate(item,duration=duration,on_finished=handle_game_over,y=HEIGHT)
+        animations.append(animation)
 
 def handle_game_over():
     global gameover
