@@ -9,7 +9,7 @@ centre_x=WIDTH/2
 centre_y=HEIGHT/2
 centre=(centre_x,centre_y)
 start_speed=10
-ITEMS=["paperbag","crate","plasticbag","bin","battery","bottle","chips"]
+ITEMS=["paperbag","crate","plasticbag","battery","bottle","chips"]
 gameover=False
 game_complete=False
 current_level=1
@@ -80,6 +80,12 @@ def animate_items(items_to_animate):
 def handle_game_over():
     global gameover
     gameover=True
+
+
+
+def display_message(heading_text, sub_heading_text):
+    screen.draw.text(heading_text, fontsize=60, center=CENTER, color="white")
+    screen.draw.text(sub_heading_text, fontsize=30, center=(CENTRE_X, CENTRE_Y + 30), color="white")
 
 
 
