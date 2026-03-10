@@ -3,11 +3,11 @@ import random
 
 
 TITLE="CLICK THE BAG GAME"
-WIDTH=800
-HEIGHT=600
-centre_x=WIDTH/2
-centre_y=HEIGHT/2
-centre=(centre_x,centre_y)
+WIDTH=1100
+HEIGHT=900
+CENTRE_X=WIDTH/2
+CENTRE_Y=HEIGHT/2
+centre=(CENTRE_X,CENTRE_Y)
 start_speed=10
 ITEMS=["paperbag","crate","plasticbag","battery","bottle","chips"]
 gameover=False
@@ -84,14 +84,36 @@ def handle_game_over():
 
 
 def display_message(heading_text, sub_heading_text):
-    screen.draw.text(heading_text, fontsize=60, center=CENTER, color="white")
+    screen.draw.text(heading_text, fontsize=60, center=centre, color="white")
     screen.draw.text(sub_heading_text, fontsize=30, center=(CENTRE_X, CENTRE_Y + 30), color="white")
 
 
 
-
-
-
+def on_mouse_down(pos):
+    global items, current_level
+    for item in items:
+        if item.collidepoint(pos):
+            if "paperbag" in item.image:
+                handle_game_complete()
+            else:
+                handle_game_over()
+    
+            
+def handle_game_complete():
+    global current_level,items,animations,game_complete
+    stop_animations(animations)
+    if current_level==final_level:
+        game_complete=True
+    else:
+    
+        current_level=current_level+1
+        items=[]
+        animations=[]
+    
+def stop_animations(animations_to_stop):
+    for animation in animations_to_stop:
+        if animation.running:
+            animation.stop()
 
 
 
