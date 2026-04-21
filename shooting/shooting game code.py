@@ -33,6 +33,7 @@ def draw():
         enemy.draw()
     for bullet in bullets:
         bullet.draw()
+    display_score()
 
 
 def update():
@@ -62,8 +63,19 @@ def update():
             if enemy.colliderect(bullet):
                 bullets.remove(bullet)
                 enemies.remove(enemy)
+                score+=10
+    if len(enemies)==0:
+       print(len(enemies))
+       display_gameover()
+    
 
-        
+
+def display_score():
+    screen.draw.text(str(score),(50,30))
+
+def display_gameover():
+    screen.draw.text("Game Over",(250,300))  
+ 
 
 def on_key_down(key):
     if key==keys.SPACE:
@@ -72,6 +84,7 @@ def on_key_down(key):
        bullets[-1].y=ship.y-50
 
 
-
+if enemies==0:
+    screen.draw.text(str(score),(10,10),fontsize=30)
 
 pgzrun.go()
