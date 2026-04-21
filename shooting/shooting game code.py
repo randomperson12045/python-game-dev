@@ -13,6 +13,7 @@ speed=2
 enemies=[]
 score=0
 direction=1
+gameover=False
 
 
 ship.pos=(WIDTH//2,HEIGHT-60)
@@ -34,10 +35,13 @@ def draw():
     for bullet in bullets:
         bullet.draw()
     display_score()
+    
+    if gameover:
+        display_gameover()
 
 
 def update():
-    global score,direction
+    global score,direction,gameover
     move_down=False
     if keyboard.left:
         ship.x-=speed
@@ -64,17 +68,17 @@ def update():
                 bullets.remove(bullet)
                 enemies.remove(enemy)
                 score+=10
-    if len(enemies)==0:
-       print(len(enemies))
-       display_gameover()
+        if len(enemies)==0:
+            print(len(enemies))
+            gameover=True
     
 
 
 def display_score():
-    screen.draw.text(str(score),(50,30))
+    screen.draw.text(str("score= {}").format(score),(50,30))
 
 def display_gameover():
-    screen.draw.text("Game Over",(250,300))  
+    screen.draw.text("Game Over",(400,300),fontsize=100)  
  
 
 def on_key_down(key):
@@ -84,7 +88,5 @@ def on_key_down(key):
        bullets[-1].y=ship.y-50
 
 
-if enemies==0:
-    screen.draw.text(str(score),(10,10),fontsize=30)
 
 pgzrun.go()
